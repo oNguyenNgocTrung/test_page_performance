@@ -1,0 +1,31 @@
+- 24.times do |i|
+  .row
+    .thumbnail
+      - image_path = image_url("girls/#{i+1}.jpg")
+      .placeholder data-large="#{image_path}"
+        = image_tag "image_small.jpg", class: "img-small"
+        div style="padding-bottom: 56.6%"
+
+javascript:
+  window.onload = function() {
+    var placeholder = $('.placeholder');
+    placeholder.each( function(index) {
+      // 1: load small image and show it
+      var smallImgElement = $(this).find('.img-small');
+      console.log(smallImgElement);
+      var img = new Image();
+      img.src = smallImgElement.attr('src');
+      img.onload = function () {
+        smallImgElement.addClass('loaded');
+      };
+
+      // 2: load large image
+      var imgLarge = new Image();
+      imgLarge.src = $(this).data('large');
+      imgLarge.onload = function () {
+        imgLarge.classList.add('loaded');
+      };
+      $(this).append(imgLarge);
+    })
+
+  }
