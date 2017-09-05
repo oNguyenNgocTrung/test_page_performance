@@ -5,5 +5,6 @@ Rails.application.routes.draw do
       get "progressive_load"
     end
   end
+  resources :test_variants, only: [:index]
   root to: "images#index"
 end
